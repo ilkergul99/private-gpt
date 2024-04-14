@@ -3,6 +3,14 @@ PrivateGPT repository as a server with minor modifications for the Coding challe
 
 When setting up a server application that heavily relies on external dependencies and specific configurations like private-gpt, it's crucial to understand the modifications needed to adapt the server to your specific requirements. Here’s an extensive explanation of setting up the private-gpt server:
 
+## Watch the demonstation of Server and Client
+
+For a detailed demonstration and walkthrough of the project setup and functionality, please visit the following link:
+
+[Watch the Demonstration](https://drive.google.com/drive/folders/10BwsbG5IFRZG0lKB7-O1U93l5FqAr71n?usp=sharing)
+
+This link provides access to a Google Drive folder containing videos and resources that showcase how the application operates and interacts with the various components detailed in the setup. 
+
 ### Cloning the Repository
 First, clone the private-gpt repository from GitHub:
 ```bash
