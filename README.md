@@ -130,3 +130,16 @@ By managing network connectivity as described:
 - **Secured Internal Communications**: The internal network ensures that critical services like Ollama are accessible only to specific components, enhancing the security posture.
 
 For additional security, consider implementing network policies that further restrict traffic between services according to the least privilege principle.
+
+### Client Application
+The client application interacts with the private-gpt server, sending requests and handling responses. It is set up to be easily accessible and modifiable:
+
+1. **GitHub Repository**: To view and download the client code, visit the GitHub repository:
+   ```plaintext
+   https://github.com/ilkergul99/client
+   ```
+   This repository contains the client-side code necessary to interface with the server.
+
+2. **Review and Modify**: Clone the repository and review the code to understand how it interacts with the server. Adjustments may be made to optimize the interaction or to extend the client’s functionality.
+
+3. **Deployment**: Deploy the client application following the instructions provided in its README. Ensure it is properly networked to communicate with the server application, especially if running within Docker containers.
