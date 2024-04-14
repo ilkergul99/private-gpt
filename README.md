@@ -9,7 +9,7 @@ For a detailed demonstration and walkthrough of the project setup and functional
 
 [Watch the Demonstration](https://drive.google.com/drive/folders/10BwsbG5IFRZG0lKB7-O1U93l5FqAr71n?usp=sharing)
 
-This link provides access to a Google Drive folder containing videos and resources that showcase how the application operates and interacts with the various components detailed in the setup. 
+This link provides access to a Google Drive folder containing video that showcases how the application operates and interacts with the various components detailed in the setup. 
 
 ### Cloning the Repository
 First, clone the private-gpt repository from GitHub:
