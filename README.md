@@ -88,16 +88,44 @@ By designing the network configurations as described:
 - **External Accessibility**: Only the necessary services are exposed to external access, minimizing potential vulnerabilities.
 - **Internal Communication Security**: Use of a private internal network for sensitive components like Ollama enhances security by limiting accessibility to trusted services.
 
+#### Changes in Settings Files
+Adjustments in the settings files were necessary to align with the updated network topology:
+   - **Host Configuration**: The reference to `localhost` was changed to `ollama` in service configuration files to correctly address the `Ollama` service within the Docker network. This change ensures that the `private-gpt` service can successfully send requests to `Ollama` using the service name as the hostname, leveraging Docker's internal DNS resolution.
+
+   - **Environmental Variables**: These were updated or added in the Docker Compose file to reflect operational modes, such as switching between different profiles or operational settings directly influenced by deployment strategies.
+
 ### Pre-Setup: Creating the External Network
 
 Before you can run the Docker Compose configuration, you must ensure that the external network (`my-app-network`) is already created since it is referenced in the Docker Compose file. This network allows the client application to communicate securely with the PrivateGPT service.
 
-To create this external network, execute the following command:
-
+Ensure that the external network (`my-app-network`) is created before running Docker Compose:
 ```bash
 docker network create my-app-network
 ```
+This command sets up the necessary network for external communication. It's essential for the seamless operation of the client-server interactions and should be created if it does not already exist in your Docker environment.
+
 This command sets up a new network which will be our external network for communication between **client** and **server**
+
+### Configuring Application Settings for Docker Environments
+
+The configuration files `settings.py` and `settings.yaml` within the `private-gpt` service are critical for defining how the application behaves and interacts with its environment and other services. Changes to these files were required to align with the Docker deployment setup specified in the `docker-compose.yaml` file.
+
+#### Reasons for Changes
+1. **Network Communication Adjustments**:
+   - The Docker environment uses network aliases and service names for inter-container communication, which necessitates referencing services by their service names (as specified in `docker-compose.yaml`) rather than `localhost`.
+   - For instance, to ensure `private-gpt` can communicate with the `Ollama` service within Docker, we changed settings to refer to the service name `ollama` instead of `localhost`. This adjustment is reflected in the `settings.yaml` where the API base URL for `Ollama` might be updated to use `http://ollama:11434` to reflect the internal network routing capabilities of Docker.
+
+2. **Environment-Specific Configuration**:
+   - Docker allows us to isolate and manage dependencies and environments through containers. The `settings.py` and `settings.yaml` files were adapted to leverage Docker environment variables (`PGPT_PROFILES`, `PGPT_MODE`, etc.) which can be set per container in the `docker-compose.yaml` file.
+   - These environment variables allow for flexible deployments where behavior can be dynamically adjusted without code changes, such as toggling between development and production modes or switching backend services.
+
+3. **Port and Volume Configuration**:
+   - Changes in the port and volume mappings in `docker-compose.yaml` necessitate corresponding updates in the application settings to ensure the application correctly binds to the exposed ports and accesses the right directories for data storage.
+   - For example, if `docker-compose.yaml` maps the `8001:8080` port, the `settings.py` must configure the application to serve on port `8080` within the container.
+
+### How to Apply These Changes
+To apply these changes in a Docker environment:
+1. **Modify the Configuration Files**: Update `settings.py` and `settings.yaml` as per the requirements of your deployment and the specifics of your Docker setup.
 
 ### Launching Services
 
